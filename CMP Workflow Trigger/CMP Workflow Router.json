@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0",
+  "agent_type": "specialized",
+  "name": "CMP Workflow Router",
+  "output": {
+    "type": "text",
+    "schema": null,
+    "description": null
+  },
+  "version": "1.0.0",
+  "agent_id": "cmp_workflow_router",
+  "file_urls": [],
+  "is_active": true,
+  "creativity": 0.5,
+  "is_deleted": false,
+  "parameters": [
+    {
+      "name": "external_system",
+      "type": "string",
+      "default": null,
+      "required": false,
+      "description": "String from the Payload data from CMP"
+    }
+  ],
+  "description": "Workflow router",
+  "enabled_tools": null,
+  "agent_metadata": null,
+  "inference_type": "simple",
+  "prompt_template": "Your role is to output the value of [[external_system]]​ which I use to then make a routing decision.\n\nOutput&nbsp;[[external_system]]​",
+  "internal_version": 6
+}

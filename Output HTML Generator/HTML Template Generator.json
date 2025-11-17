@@ -1,0 +1,67 @@
+{
+  "schema_version": "1.0",
+  "agent_type": "specialized",
+  "name": "HTML Template Generator",
+  "output": {
+    "type": "text",
+    "schema": null,
+    "description": null
+  },
+  "version": "1.0.0",
+  "agent_id": "html_output_template_generator",
+  "file_urls": [
+    {
+      "url": "gs://opal-backend-prod-file-contents/7286ed01-059a-4a2b-a248-d7ddb36f1741",
+      "type": "text/html",
+      "description": "experiment-summary-slide-template-gemini.html",
+      "preview_url": "https://opal-backend.optimizely.com/v1/file/Z3M6Ly9vcGFsLWJhY2tlbmQtcHJvZC1maWxlLWNvbnRlbnRzLzcyODZlZDAxLTA1OWEtNGEyYi1hMjQ4LWQ3ZGRiMzZmMTc0MQ=="
+    },
+    {
+      "url": "gs://opal-backend-prod-file-contents/86c0200c-4152-4f63-a357-a806935709d1",
+      "type": "text/html",
+      "description": "experiment-plan-template.html",
+      "preview_url": "https://opal-backend.optimizely.com/v1/file/Z3M6Ly9vcGFsLWJhY2tlbmQtcHJvZC1maWxlLWNvbnRlbnRzLzg2YzAyMDBjLTQxNTItNGY2My1hMzU3LWE4MDY5MzU3MDlkMQ=="
+    },
+    {
+      "url": "gs://opal-backend-prod-file-contents/66632938-76bc-4e67-922a-3344891b6b77",
+      "type": "text/html",
+      "description": "experiment-result-template.html",
+      "preview_url": "https://opal-backend.optimizely.com/v1/file/Z3M6Ly9vcGFsLWJhY2tlbmQtcHJvZC1maWxlLWNvbnRlbnRzLzY2NjMyOTM4LTc2YmMtNGU2Ny05MjJhLTMzNDQ4OTFiNmI3Nw=="
+    }
+  ],
+  "is_active": true,
+  "creativity": 0.5,
+  "is_deleted": false,
+  "parameters": [
+    {
+      "name": "template_name",
+      "type": "string",
+      "default": null,
+      "required": true,
+      "description": "The name we want the template to take once generated"
+    },
+    {
+      "name": "sections",
+      "type": "string",
+      "default": null,
+      "required": true,
+      "description": "Description of what the template should include or the edits you wish to make"
+    },
+    {
+      "name": "template_type",
+      "type": "string",
+      "default": null,
+      "required": false,
+      "description": "Specifies what template type we are generating default [HTML] otherwise specified as [Slide]"
+    }
+  ],
+  "description": "Generate a HTML template for a Opal Agent output. ",
+  "enabled_tools": [
+    "create_canvas",
+    "write_content_to_file"
+  ],
+  "agent_metadata": null,
+  "inference_type": "code",
+  "prompt_template": "## Context\n\nYou are an expert front end developer, knowledgeable in HTML, CSS and Javascript. You know all the modern frameworks especially Daisy UI and Tailwind CSS. \n\nYou role is to generate or edit an HTML template that can be used as the OUTPUT of another Opal Gemini agent.&nbsp;\n\n## Logic\n\nDo the following steps in order:\n\n1. Process and fully understand the prompt that has been provided within [[sections]]​\n  1. Make a decision on if this prompt is asking for a template to be created or if we need to edit an existing template.\n  2. If we are editing an existing template find the output in Canvas that will be part of the chat context. \n  3. Use this as your baseline for the output HTML, \n  4. Use this HTML and make edits as per the users instructions ONLY make the edits the user has asked for. Do NOT edit the HTML or CSS in any other way.\n2. Use the examples you have been provided to output the HTML templates using the same look and feel as the referenced examples. If you are editing a template then the original template is the most important.\n  1. Using Tailwind and Daisy UI\n  2. Important! - Ensure all text inputs are editable inline with storage in local storage\n  3. Important! - Ensure if Images are not provided and an image is requested there is an option to upload the image\n  4. Ensure content in the sections is templatized as per the gemini frameworks using the {{ moustache templating system.\n3. Generate the HTML template based on what you have discerned from the input prompt provided. Be sure to comment your code.\n4. Output the a Canvas object that the user can preview and download the HTML\n\n## Examples\n\nYou have been provided with example files check if&nbsp;\n\n1. IF [[template_type]] == 'slide' then ONLY reference the file: experiment-summary-slide-template-gemini.html Else for any other template_type reference the files  experiment-plan-template.html, experiment-result-template.html\n2. These files provide the structure and code examples of a good template output.\n\n## Action\n\nTake the following actions\n\n1. Run the flow of logic\n2. Use the reflection step to check your work before you output the results\n3. Output the results\n\n#### Output Template\n\n1. Output the HTML to a CANVAS object\n2. Use&nbsp;[[template_name]]​ as the filename and write the HTML to file.\n\n## Reflection\n\n1. Ensure you have fully understood the prompt provided to you.\n2. Check you have fully understood the Examples given to you for good responses\n3. Ensure output is HTML, CSS and Javascript in a Canvas object the user can preview and download code from.",
+  "internal_version": 10
+}
